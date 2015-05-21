@@ -1,20 +1,21 @@
 require 'faker'
 
-# Create Posts
-50.times do
-  Post.create!(
-    title:  Faker::Lorem.sentence,
-    body:   Faker::Lorem.paragraph
- )
-end
-posts = Post.all
+# create a unique post
+post_atrributes = [
+  { title: "TEST POST", body: "This is the body for TEST POST" }
+]
 
-# Create Comments
-100.times do
-  Comment.create!(
-    post: posts.sample,
-    body: Faker::Lorem.paragraph
- )
+post_atrributes.each do |attributes|
+  Post.where(attributes).first_or_create
+end
+
+# create a unique comment
+comment_atrributes = [
+  { post: "TEST POST - COMMENT", body: "This is a TEST comment" }
+]
+
+comment_atrributes.each do |attributes|
+  Comment.where(attributes).first_or_create
 end
 
 puts "Seed finished"
