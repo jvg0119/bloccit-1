@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   def show
     set_post
     set_topic
+    @summary = @post.summary
   end
 
   def new
@@ -20,7 +21,6 @@ class PostsController < ApplicationController
     if @post.save
       flash[:notice] = "Post was saved."
         
-      # redirect extracts the id from @post
       redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
