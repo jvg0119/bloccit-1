@@ -16,6 +16,8 @@ gem 'pundit'
 
 gem 'annotate', '~> 2.6.6'
 
+gem 'rubocop', require: false
+
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :production do
