@@ -4,19 +4,9 @@
   <div class="col-md-8">
     <p><%= @post.body %></p>
   </div>
-
   <div class="col-md-4">
-    <% if @summary %>
-      <!-- could have also used [@topic, @post, @summary] instead of topic_post_summary_path() -->
-      <%= link_to "Show Summary", topic_post_summary_path(@topic, @post, @summary), class: 'btn btn-success' %>
-    <% end %>
-
-    <% if policy(@post).edit? && !@summary %>
-      <%= link_to "New Summary", new_topic_post_summary_path(@topic, @post), class: 'btn btn-success' %>
-    <% end %>
-    
     <% if policy(@post).edit? %>
-      <%= link_to "Edit Post", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
+      <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
     <% end %>
   </div>
 </div>
