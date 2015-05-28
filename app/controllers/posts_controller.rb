@@ -2,7 +2,8 @@ class PostsController < ApplicationController
 
   def show
     set_post
-    set_topic
+    #set_topic
+    @topic = @post.topic
     @summary = @post.summary
   end
 

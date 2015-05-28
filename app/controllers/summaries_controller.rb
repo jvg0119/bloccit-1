@@ -1,8 +1,9 @@
 class SummariesController < ApplicationController
   
   def show
-    set_topic
-    set_post
+    #set_topic
+    #set_post
+    #@summary = @post.summary
     set_summary
   end
 
