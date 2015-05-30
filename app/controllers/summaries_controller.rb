@@ -1,24 +1,20 @@
 class SummariesController < ApplicationController
   
   def show
-    #set_topic
-    #set_post
-    #@summary = @post.summary
     set_summary
   end
 
   def new
-    set_topic
     set_post
+    @topic = @post.topic
     @summary = Summary.new
     authorize @summary
   end
 
   def create
-    set_topic
-    set_post
     @summary = Summary.new(summary_params)
-    @summary.post = @post
+    @summary.post = set_post
+    @topic = @post.topic
     authorize @summary
     
     if @summary.save
@@ -39,16 +35,16 @@ class SummariesController < ApplicationController
     end
 
     def set_topic
-      @topic = Topic.find(params[:topic_id])
+      @topic ||= Topic.find(params[:topic_id])
     end
 
     def set_post
-      @post = Post.find(params[:post_id])
+      @post ||= Post.find(params[:post_id])
     end
 
     def set_summary
-      @summary = Summary.find(params[:id])
-      authorize @summary 
+      @summary = set_post.summary
+      authorize @summary
     end
   
 end
