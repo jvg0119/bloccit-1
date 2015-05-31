@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'figaro', '1.0'
 gem 'pundit'
+gem 'redcarpet'
 
 gem 'annotate', '~> 2.6.6'
 
