@@ -4,6 +4,11 @@ class PostsController < ApplicationController
     set_post
     set_topic
     @comments = @post.comments
+
+    if current_user
+      @comment = Comment.new
+      authorize @comment, :new?
+    end
   end
 
   def new
