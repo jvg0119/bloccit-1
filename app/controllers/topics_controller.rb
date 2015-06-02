@@ -43,6 +43,18 @@ class TopicsController < ApplicationController
     end
   end
 
+  def destroy
+    set_topic
+
+    if @topic.destroy
+      flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
+      redirect_to topics_path
+    else
+      flash[:error] = "There was an error deleting the topic."
+      render :show
+    end
+  end
+
   private
 
     # I had already implemented this assignments specs - (topic_params)
@@ -51,7 +63,7 @@ class TopicsController < ApplicationController
     end
 
     def set_topic
-      @topic = Topic.find(params[:id])
+      @topic ||= Topic.find(params[:id])
       authorize @topic
     end
 end
