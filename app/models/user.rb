@@ -21,6 +21,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  role                   :string
+#  avatar                 :string
 #
 
 class User < ActiveRecord::Base
@@ -30,6 +31,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   
   has_many :posts
+  has_many :comments
   mount_uploader :avatar, AvatarUploader
 
   def admin?
@@ -38,6 +40,10 @@ class User < ActiveRecord::Base
 
   def moderator?
     role == 'moderator'
+  end
+
+  def member?
+    role == 'member'
   end
 
 end
