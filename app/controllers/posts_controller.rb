@@ -4,6 +4,11 @@ class PostsController < ApplicationController
     set_post
     set_topic
     @comments = @post.comments
+
+    if current_user
+      @comment = Comment.new
+      authorize @comment, :new?
+    end
   end
 
   def new
@@ -44,19 +49,6 @@ class PostsController < ApplicationController
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :edit
-    end
-  end
-
-  def destroy
-    set_topic
-    set_post
-
-    if @post.destroy
-      flash[:notice] = "\"#{@post.title}\" was deleted successfully."
-      redirect_to @topic
-    else
-      flash[:error] = "There was an error deleting the post."
-      render :show
     end
   end
 

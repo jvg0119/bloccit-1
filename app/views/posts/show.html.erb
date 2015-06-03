@@ -32,9 +32,10 @@
 
   <!-- more verbose than: render @comments -->
   <%= render partial: 'comments/comment', collection: @comments %>
+  
+  <% if policy(@comments).create? %>
+    <h5>New Comment</h5>
 
-  <h5>New Comment</h5>
-
-  <!-- I origionaly included summary: @summery which was an instance var of Summary.new in the contoller but my code below was how I interpreted the specs of the checkpoint -->
-  <%= render partial: 'comments/form', locals: { topic: @topic, post: @post } %>
+    <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+  <% end %>
 </div>

@@ -1,11 +1,12 @@
 class CommentsController < ApplicationController
   def create
-    set_topic
-    set_post
+    set_topic_and_post
     @comments = @post.comments
 
     @comment = current_user.comments.build(comment_params)
     @comment.post = @post
+
+    authorize @comment
 
     if @comment.save
       flash[:notice] = "Comment saved"
@@ -37,7 +38,7 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:body)
     end
 
-    def set_topic
+    def set_topic_and_post
       @topic ||= Topic.find(params[:topic_id])
     end
 

@@ -1,5 +1,4 @@
-<!-- I origionaly had comment as the third argument (from Post#show but my code below is how I interpreted the checkpoint specs) -->
-<%= form_for [topic, post, comment = post.comments.new] do |f| %>
+<%= form_for [topic, post, comment] do |f| %>
   <% if comment.errors.any? %>
     <div class="alert alert-danger">
       <h4>There are <%= pluralize(comment.errors.count, "error") %>.</h4>
