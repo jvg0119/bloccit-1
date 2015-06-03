@@ -18,9 +18,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'will_paginate', '~> 3.0.5'
-
 gem 'annotate', '~> 2.6.6'
-
 gem 'rubocop', require: false
 
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -32,4 +30,8 @@ end
 
 group :development do
   gem 'sqlite3'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
 end
