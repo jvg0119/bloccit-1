@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def create
-    set_topic_and_post
+    set_post
+    @topic = @post.topic
     @comments = @post.comments
 
     @comment = current_user.comments.build(comment_params)
@@ -18,8 +19,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    set_topic
     set_post
+    @topic = @post.topic
     @comment = @post.comments.find(params[:id])
     authorize @comment
 
@@ -38,12 +39,8 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:body)
     end
 
-    def set_topic_and_post
-      @topic ||= Topic.find(params[:topic_id])
-    end
-
     def set_post
-      @post ||= @topic.posts.find(params[:post_id])
+      @post ||= Post.find(params[:post_id])
     end
 
 end
