@@ -1,15 +1,14 @@
-
-<h1 class="post-inline1"><%= markdown_to_html @post.title %></h1>
-<%= image_tag(@post.image.profile.url, class: 'post-inline2') if @post.image? %>
-
 <div class="row">
   <div class="col-md-8">
-  <small>
-    <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
-    Submitted <%= time_ago_in_words(@post.created_at) %> ago by
-    <%= @post.user.name %>
-  </small>
-  <hr />
+    <%= render partial: 'votes/voter', locals: { post: @post } %>
+    <h1 class="post-inline1"><%= markdown_to_html @post.title %></h1>
+    <%= image_tag(@post.image.profile.url, class: 'post-inline2') if @post.image? %>
+    <small>
+      <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
+      Submitted <%= time_ago_in_words(@post.created_at) %> ago by
+      <%= @post.user.name %>
+    </small>
+    <hr />
     <p><%= markdown_to_html @post.body %></p>
   </div>
   <div class="col-md-4">
@@ -19,6 +18,13 @@
     <% if policy(@post).destroy? %>
       <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
     <% end %>
+    <div>
+      <h3><%= pluralize(@post.points, 'point') %></h3>
+      <small>
+        <%= pluralize(@post.up_votes, 'up vote') %>,
+        <%= pluralize(@post.down_votes, 'down vote') %>
+      </small>
+    </div>
   </div>
 </div>
 
