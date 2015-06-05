@@ -1,27 +1,31 @@
 require 'rails_helper'
 
 describe Vote do
+
+  include TestFactories
+
   describe "validations" do
-    
-    describe "value -1 validation" do
-      it "accepts -1 as a valid value" do
-        vote = Vote.new(value: -1)
-        expect(vote.save).to be_truthy
-      end
-    end
+    describe "value validation" do
+      it "only allows -1 or 1 as values" do
+        up_vote = Vote.new(value: 1)
+        expect(up_vote.valid?).to eq(true)
 
-    describe "value 1 validation" do
-      it "accepts 1 as a valid value" do
-        vote = Vote.new(value: 1)
-        expect(vote.save).to be_truthy
-      end
-    end
+        down_vote = Vote.new(value: -1)
+        expect(down_vote.valid?).to eq(true)
 
-    describe "non-valid validation" do
-      it "all values other than 1 and -1 are invalid" do
-        vote = Vote.new(value: 3)
-        expect(vote.save).to be_falsey
+        invalid_vote = Vote.new(value: 2)
+        expect(invalid_vote.valid?).to eq(false)
       end
     end
   end
+
+  describe 'after_save' do
+    it "calls `Post#update_rank` after save" do
+      post = associated_post
+      vote = Vote.new(value: 1, post: post)
+      expect(post).to receive(:update_rank)
+      vote.save
+    end
+  end
 end
+ 
