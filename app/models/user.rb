@@ -22,6 +22,7 @@
 #  updated_at             :datetime         not null
 #  role                   :string
 #  avatar                 :string
+#  email_favorites        :boolean          default(TRUE)
 #
 
 class User < ActiveRecord::Base
@@ -33,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   mount_uploader :avatar, AvatarUploader
 
   def admin?
@@ -45,6 +47,10 @@ class User < ActiveRecord::Base
 
   def member?
     role == 'member'
+  end
+
+  def favorited(post)
+    favorites.where(post_id: post.id).first
   end
 
 end
