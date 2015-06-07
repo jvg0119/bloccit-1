@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   def index
     @topics = Topic.all
-    @topics = Topic.paginate(page: params[:page], per_page: 10)
+    @topics = Topic.visible_to(current_user).paginate(page: params[:page], per_page: 10)
     authorize @topics
   end
 
@@ -20,7 +20,6 @@ class TopicsController < ApplicationController
   end
 
   def create
-    # I had already implemented this assignments specs - (topic_params)
     @topic = Topic.new(topic_params)
     authorize @topic
 
@@ -34,7 +33,6 @@ class TopicsController < ApplicationController
 
   def update
     set_topic
-    # I had already implemented this assignments specs - (topic_params)
     if @topic.update_attributes(topic_params)
       redirect_to @topic
     else
@@ -57,7 +55,6 @@ class TopicsController < ApplicationController
 
   private
 
-    # I had already implemented this assignments specs - (topic_params)
     def topic_params
       params.require(:topic).permit(:name, :description, :public)
     end

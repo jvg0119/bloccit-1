@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   def show
     set_post
     set_topic
+    authorize @topic
     @comments = @post.comments
 
     if current_user
