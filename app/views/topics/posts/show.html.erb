@@ -37,7 +37,6 @@
 
   <h4>Comments: <%= @comments.count %></h4>
 
-  <!-- more verbose than: render @comments -->
   <%= render partial: 'comments/comment', collection: @comments %>
   
   <% if policy(@comments).create? %>

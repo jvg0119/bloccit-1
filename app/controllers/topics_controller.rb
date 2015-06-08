@@ -1,6 +1,5 @@
 class TopicsController < ApplicationController
   def index
-    @topics = Topic.all
     @topics = Topic.visible_to(current_user).paginate(page: params[:page], per_page: 10)
     authorize @topics
   end
@@ -12,7 +11,7 @@ class TopicsController < ApplicationController
 
   def show
     set_topic
-    @posts = @topic.posts.paginate(page: params[:page], per_page: 10)
+    @posts = @topic.posts.includes(:user).includes(:comments).paginate(page: params[:page], per_page: 10)
   end
 
   def edit
