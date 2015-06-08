@@ -1,4 +1,8 @@
 module TestFactories
+
+  include Warden::Test::Helpers
+  Warden.test_mode!
+
   def associated_post(options={})
     post_options = {
       title: 'Post title',
