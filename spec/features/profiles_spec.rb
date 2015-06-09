@@ -25,12 +25,12 @@ describe "Visiting profiles" do
  
   end
 
-  before do
-    login_as(@user, scope: :user)
-  end
-
   describe "signed in" do
- 
+  
+    before do
+      login_as(@user, scope: :user)
+    end
+
     it "shows profile" do
       visit user_path(@user)
       expect(current_path).to eq(user_path(@user))
