@@ -21,6 +21,7 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'annotate', '~> 2.6.6'
 gem 'rubocop', require: false
 gem 'newrelic_rpm'
+gem 'factory_girl_rails', '~> 4.0'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
