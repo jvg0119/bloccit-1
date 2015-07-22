@@ -1,5 +1,11 @@
-## Bloccit: a Reddit replica to teach the fundamentals of web development and Rails.
+# Bloccit
 
-Made with my mentor at [Bloc](http://bloc.io).
+A fully functional Reddit replica.
 
-Link to my app [mcgivern-bloccit](http://mcgivern-bloccit.herokuapp.com/)
+Users can post, vote on, share and save links and comments.  Users can also favorite posts, which will send them email notifications whenever a new comment is added.
+
+Bloccit has both private and public Topics.
+
+Bloccit uses an algorithm for voting and ranking with time-decay to keep post listings fresh.
+
+Live demo [mcgivern-bloccit](http://mcgivern-bloccit.herokuapp.com/)
